@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 export class AppService {
   private readonly logger = new Logger(AppService.name);
 
-  async check() {
+  check() {
     this.logger.debug('API is works');
 
     return 'API is works';

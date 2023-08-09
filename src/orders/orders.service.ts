@@ -13,7 +13,7 @@ export class OrdersService {
     private readonly configService: ConfigService
   ) {}
 
-  async getAll(): Promise<IOrder[]> {
+  async getAll(googleDocId: string): Promise<IOrder[]> {
     // Initialize the OAuth2Client with your app's oauth credentials
     // https://theoephraim.github.io/node-google-spreadsheet/#/guides/authentication?id=oauth
     const oauthClient = new OAuth2Client({
@@ -44,7 +44,6 @@ export class OrdersService {
       this.logger.log(credentials.token_type); // will always be 'Bearer'
     });
 
-    const googleDocId = this.configService.get<string>('GOOGLE_DOCUMENT_ID');
     const doc = new GoogleSpreadsheet(googleDocId, oauthClient);
 
     await doc.loadInfo(); // loads document properties and worksheets

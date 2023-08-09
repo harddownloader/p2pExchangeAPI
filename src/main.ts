@@ -4,6 +4,7 @@ import { join } from "path";
 import { ConfigService } from '@nestjs/config';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
   const logger = new Logger(bootstrap.name);
@@ -28,6 +29,14 @@ async function bootstrap() {
 
   /* api routes prefix */
   app.setGlobalPrefix('api');
+
+  /* swagger */
+  const config = new DocumentBuilder()
+    .setTitle('Backend')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, document, {});
 
   /* starting app */
   const PORT = Number(process.env.PORT || 3002);

@@ -6,14 +6,16 @@ export type TOrderSumPayment = number | null;
 export type TOrderStatus = string | null;
 export type TOrderPostPayment = number | null;
 export type TOrderScreenshot = string | null;
+export type TOrderCompensation = number | null;
 
 export interface IOrder {
   rowNum: TOrderRowNum;
   date: TOrderDate;
   orderId: TOrderId;
   card: TOrderCard;
-  sumPayment: TOrderSumPayment;
+  payoutAmount: TOrderSumPayment;
   status: TOrderStatus;
   postPayment: TOrderPostPayment;
   screenshot: TOrderScreenshot;
+  compensation: TOrderCompensation;
 }

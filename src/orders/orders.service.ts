@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { OAuth2Client } from 'google-auth-library'
 import { ConfigService } from '@nestjs/config';
-import { google } from 'googleapis';
 import { IOrder } from "./types";
 
 @Injectable()
@@ -68,10 +67,11 @@ export class OrdersService {
         date: null, // date of order
         orderId: null,
         card: null,
-        sumPayment: null,
+        payoutAmount: null,
         status: null,
         postPayment: null,
-        screenshot: null
+        screenshot: null,
+        compensation: null
       };
       const startCol = 2;
       const endCol = 20;
@@ -93,7 +93,7 @@ export class OrdersService {
             newRow.card = colRes.value;
             break;
           case 5:
-            newRow.sumPayment = colRes.numberValue;
+            newRow.payoutAmount = colRes.numberValue;
             break;
           case 7:
             newRow.status = colRes.value;
